@@ -1,0 +1,294 @@
+<html>
+	<head>
+
+			<title>
+					BMI Calci Upgraded Version
+			</title>
+
+			<link rel = "stylesheet"	href = "mystyle.css"/>
+		<script>
+
+function toggleHeightInputs()
+{
+    let unit = document.getElementById("heightUnit").value;
+
+    document.getElementById("cmRow").style.display = "none";
+    document.getElementById("mRow").style.display = "none";
+    document.getElementById("ftRow").style.display = "none";
+    document.getElementById("inchRow").style.display = "none";
+
+    if(unit === "cm")
+    {
+        document.getElementById("cmRow").style.display = "table-row";
+    }
+    else if(unit === "m")
+    {
+        document.getElementById("mRow").style.display = "table-row";
+    }
+    else
+    {
+        document.getElementById("ftRow").style.display = "table-row";
+        document.getElementById("inchRow").style.display = "table-row";
+    }
+}
+
+function check(event)
+{
+    event.preventDefault();
+
+    let name = document.getElementById("id_name");
+    let age = document.getElementById("id_age");
+    let wt = document.getElementById("id_wt");
+
+    if(name.value === "")
+    {
+        alert("Please enter name");
+        name.focus();
+        return;
+    }
+
+    if(!name.value.match(/^[A-Za-z ]+$/))
+    {
+        alert("Name should contain only alphabets");
+        name.focus();
+        return;
+    }
+
+    if(name.value.length < 2)
+    {
+        alert("Name should contain minimum 2 letters");
+        name.focus();
+        return;
+    }
+
+    if(age.value === "")
+    {
+        alert("Please enter age");
+        age.focus();
+        return;
+    }
+
+    let a = parseFloat(age.value);
+
+    if(a < 1 || a > 100)
+    {
+        alert("Age should be between 1 and 100");
+        age.focus();
+        return;
+    }
+
+    if(wt.value === "")
+    {
+        alert("Please enter weight");
+        wt.focus();
+        return;
+    }
+
+    let w = parseFloat(wt.value);
+
+    if(w < 10)
+    {
+        alert("Weight should be minimum 10 kg");
+        wt.focus();
+        return;
+    }
+
+    let unit = document.getElementById("heightUnit").value;
+    let hm = 0;
+
+    if(unit === "cm")
+    {
+        let cm = document.getElementById("heightCm");
+
+        if(cm.value === "")
+        {
+            alert("Please enter height in cm");
+            cm.focus();
+            return;
+        }
+
+        hm = parseFloat(cm.value) / 100;
+    }
+    else if(unit === "m")
+    {
+        let m = document.getElementById("heightM");
+
+        if(m.value === "")
+        {
+            alert("Please enter height in meters");
+            m.focus();
+            return;
+        }
+
+        hm = parseFloat(m.value);
+    }
+    else
+    {
+        let ft = document.getElementById("id_ft");
+        let inch = document.getElementById("id_inch");
+
+        if(ft.value === "")
+        {
+            alert("Please enter height in feet");
+            ft.focus();
+            return;
+        }
+
+        if(inch.value === "")
+        {
+            alert("Please enter height in inches");
+            inch.focus();
+            return;
+        }
+
+        let f = parseFloat(ft.value);
+        let i = parseFloat(inch.value);
+
+        if(f < 1 || f > 8)
+        {
+            alert("Feet should be between 1 and 8");
+            ft.focus();
+            return;
+        }
+
+        if(i < 0 || i > 11)
+        {
+            alert("Inches should be between 0 and 11");
+            inch.focus();
+            return;
+        }
+
+        hm = ((f * 12) + i) * 0.0254;
+    }
+
+    localStorage.setItem("name", name.value);
+    localStorage.setItem("age", a);
+    localStorage.setItem("wt", w);
+    localStorage.setItem("hm", hm);
+    localStorage.setItem("unit", unit);
+
+    window.location.href = "bmicalci.html";
+}
+
+</script>
+	</head>
+	
+	<body onload="toggleHeightInputs()">
+				<div class = "nav">
+
+					<a href = "index.html"> Home </a>
+					<a href = "aboutus.html"> AboutUs </a>
+	
+				</div>
+
+				
+				<h1 style = "color:Snow"> Fill the Form </h1>
+
+				<form onsubmit = "check(event)">
+					<table border = "5">
+
+						<tr>
+								<td style = "color: Snow;  background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.5);">
+										<label> Name </label>
+								</td>
+
+								<td>
+										<input type = "text"	id = "id_name"	placeholder = "Enter Name" />
+								</td>
+						</tr>
+
+						<tr>
+								<td style = "color: Snow;  background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.5);">
+										<label> Age </label>
+								</td>
+
+								<td>
+										<input type = "number"	id = "id_age"	placeholder = "Enter Age" />
+								</td>
+						</tr>
+						
+						<tr>
+								<td style = "color: Snow;  background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.5);">
+										<label> Weight in Kg </label>
+								</td>
+
+								<td>
+										<input type = "number"		id = "id_wt"	step = "0.01"		placeholder = "Enter Weight" />
+								</td>
+						</tr>
+
+						
+
+						<tr>
+    <td class="label-cell">
+        <label>Height Unit</label>
+    </td>
+    <td>
+        <select id="heightUnit" onchange="toggleHeightInputs()">
+            <option value="cm">Centimeters (cm)</option>
+            <option value="m">Meters (m)</option>
+            <option value="ftin">Feet & Inches</option>
+        </select>
+    </td>
+</tr>
+
+<tr id="cmRow">
+    <td class="label-cell">
+        <label>Height (cm)</label>
+    </td>
+    <td>
+        <input type="number" id="heightCm" placeholder="Enter height in cm">
+    </td>
+</tr>
+
+<tr id="mRow" style="display:none;">
+    <td class="label-cell">
+        <label>Height (m)</label>
+    </td>
+    <td>
+        <input type="number" step="0.01" id="heightM" placeholder="Enter height in meters">
+    </td>
+</tr>
+
+<tr id="ftRow" style="display:none;">
+    <td class="label-cell">
+        <label>Height (feet)</label>
+    </td>
+    <td>
+        <input type="number" id="id_ft" placeholder="Enter height in feet">
+    </td>
+</tr>
+
+<tr id="inchRow" style="display:none;">
+    <td class="label-cell">
+        <label>Height (inches)</label>
+    </td>
+    <td>
+        <input type="number" id="id_inch" placeholder="Enter height in inches">
+    </td>
+</tr>
+					</table>
+					<br/>
+
+					<input type = "submit" class = "btn"/>
+					<input type = "reset" class = "btn"/>
+				</form>
+	</body>
+
+
+</html>
