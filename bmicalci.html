@@ -1,0 +1,106 @@
+<html>
+	<head>
+
+			<title>
+					BMI Calci Upgraded Version
+			</title>
+
+			<link rel = "stylesheet"	href = "mystyle.css"/>
+			<script>
+						function compute(event)
+
+						{
+							event.preventDefault();
+							let wt = localStorage.getItem("wt");
+							let hm = localStorage.getItem("hm");
+
+							let msg = document.getElementById("id_msg");
+
+							let bmi = wt/(hm ** 2);
+							bmi = bmi.toFixed(2);
+
+							if (bmi < 18.5)
+								msg.textContent = bmi+ " = Underweight";
+							else if (bmi < 23)
+								msg.textContent = bmi+ " = Normal weight";
+							else if (bmi < 25)
+								msg.textContent = bmi+ " = Overweight";
+							else
+								msg.textContent = bmi+ " = Obsese";
+
+						}
+
+							
+			</script>
+	</head>
+	
+	<body>
+				<div class = "nav">
+
+					<a href = "index.html"> Home </a>
+					<a href = "aboutus.html"> AboutUs </a>
+	
+				</div>
+				
+				<h1 style = "color: Snow; background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.5);"> BMI Calculator </h1>
+				<h2 id = "id_data"></h2>
+
+				<script>
+
+					let name = localStorage.getItem("name");
+					if( name === null)
+					{
+						alert("Dont be oversmart! niklo yaha se");
+						window.location.href = "index.html";
+
+					}
+							let age = localStorage.getItem("age");
+
+							let wt = localStorage.getItem("wt");
+
+							let hm = localStorage.getItem("hm");
+
+							let data = document.getElementById("id_data");
+
+							data.innerHTML = 	`<p>1. Name &nbsp;= ${name}</p>
+    												<p>2. Age &nbsp;&nbsp;= ${age}</p>
+    												<p>3. Weight = ${wt}</p>
+   	 											<p>4. Height = ${hm} (in metres)</p>`;
+
+
+				</script>
+
+				<form onsubmit = "compute(event)">
+					<input type = "submit"		value = "Find BMI"	class = "btn"/>
+				</form>
+
+				<h2 id = "id_msg"></h2>
+
+				<label style = "color: Snow;  background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.5);"> BMI Values Interpretation </label>
+				<br/><br/>
+				<table border = "5">
+
+						<tr><td><span class="bmi-range">&lt; 18.5</span></td> <td><span class="underweight">Underweight</span></td></tr>
+
+						<tr><td><span class="bmi-range">&lt; 23</span></td>   <td><span class="normal">Normal Weight</span></td></tr>
+
+						<tr><td><span class="bmi-range">&lt; 25</span></td>   <td><span class="overweight">OverWeight</span></td></tr>
+			
+						<tr><td><span class="bmi-range">&gt; 25</span></td>  <td><span class="obese">Obese</span></td></tr>
+
+					</table>
+
+					</body>
+
+
+</html>

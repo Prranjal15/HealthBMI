@@ -1,0 +1,88 @@
+<html>
+	<head>
+
+			<title>
+					BMI Calci Upgraded Version
+			</title>
+
+			<link rel = "stylesheet"	href = "mystyle.css"/>
+			
+	</head>
+	
+	<body>
+				<div class = "nav">
+
+					<a href = "index.html"> Home </a>
+					<a href = "aboutus.html"> AboutUs </a>
+	
+				</div>
+
+				<h1 style = "color:Snow"> About Prranjal </h1>
+				<h2 style = "color:Snow"> - Third year student studying in SIES GST, Nerul </h2>
+					
+					<h2 style = "color:Snow"> - I devloped and deployed this project under the guidance of Kamal Sir.  </h2>
+					
+					<h2 style = "color:Snow"> - I am currently learning more projects in the JS MERN June batch  </h2>
+
+					<h2 style = "color:Snow"> - Hoping to create more such innovative and helpful projects!   </h2>
+
+					<h2 style = "color:Snow; text-align: center;"> You can contact me here:   </h2>
+					 
+
+					
+
+					
+
+					<form onsubmit = "process(event)">
+
+							<input type = "submit"		value = "WhatsApp"	class = "btn"/>
+							<input type = "submit"		value = "Email"	class = "btn"/>
+					</form>
+
+					
+					<script>
+								function process(event)
+
+								{
+										event.preventDefault();
+										let action = document.activeElement.value;
+
+										if(action === "WhatsApp")
+										{
+											let mobile = "919326446254";
+											let msg = "Hi! I want more information.";
+											let url = "https://web.whatsapp.com/send?phone=" +mobile+ "&text=" +encodeURIComponent(msg);
+											window.open(url, "_blank"); 
+
+										}
+										
+										
+										else if(action === "Email")
+										{
+											let email = "prranjal.sankhe@gmail.com";
+											let subject = "Message from Website";
+											let msg = "Hi! I want more information.";
+											let url = "https://mail.google.com/mail/?view=cm&fs=1" + "&to=" +email+ "&su=" +encodeURIComponent(subject)+ "&body=" +encodeURIComponent(msg);
+											window.open(url);
+										}
+					}
+
+										
+
+
+
+
+
+								
+					
+							localStorage.removeItem("name");
+							localStorage.removetItem("age");
+							localStorage.removeItem("wt");
+							localStorage.removeItem("hm");
+
+				</script>
+
+					</body>
+
+
+</html>
